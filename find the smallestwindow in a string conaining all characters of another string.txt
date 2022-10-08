@@ -1,0 +1,32 @@
+{
+    public:
+   string smallestWindow (string s, string p){
+    vector<int> mp(128,0);
+    for(char c: p) mp[c]++;
+    int start = 0, end = INT_MAX, i = 0, j =0, len = p.size();
+     while(i<s.size()){
+        if(mp[s[i]] > 0)
+        len--;
+        mp[s[i]]--;
+        i++;
+        
+        while(len == 0)
+        {
+             if(i-j<end) 
+             {
+                 start = j;
+                  end = i - start;
+             }
+             if(mp[s[j]] == 0) 
+             len++;
+             mp[s[j]]++;
+             j++;
+        }
+        
+  }
+  return end != INT_MAX ? s.substr(start,end) : "-1";
+}
+
+};
+
+
